@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Prevent aggressive browser caching during development -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Beatz by Elle</title>
+
+  <!-- Modern studio font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Cache busting: Add ?v= with timestamp to force reload on changes -->
+  <link rel="stylesheet" href="style.css?v=20251222-59" />
+</head>
+<body>
+
+  <!-- Headphones Icon -->
+  <div class="headphones-icon">
+    <div class="headband"></div>
+    <div class="ear-cup left"></div>
+    <div class="ear-cup right"></div>
+  </div>
+
+  <!-- Title -->
+  <h1>Beatz by Elle</h1>
+
+  <!-- Project Save/Load Section -->
+  <div class="project-manager">
+    <h2>PROJECT MANAGER</h2>
+    <div class="project-controls">
+      <div class="project-name-group">
+        <input type="text" id="project-name" placeholder="My Beat" maxlength="30" value="Untitled Project">
+        <span class="project-info" id="project-info">Not saved</span>
+      </div>
+      <div class="project-buttons">
+        <button id="save-project" class="project-btn save-btn">
+          <span class="btn-text">SAVE</span>
+        </button>
+        <button id="load-project" class="project-btn load-btn">
+          <span class="btn-text">LOAD</span>
+        </button>
+        <button id="export-project" class="project-btn export-btn">
+          <span class="btn-text">EXPORT</span>
+        </button>
+        <button id="import-project" class="project-btn import-btn">
+          <span class="btn-text">IMPORT</span>
+        </button>
+        <button id="new-project" class="project-btn new-btn">
+          <span class="btn-text">NEW</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Saved Projects List -->
+    <div class="saved-projects" id="saved-projects-container">
+      <h3>Saved Projects <span class="project-count" id="project-count">(0)</span></h3>
+      <div class="projects-list" id="projects-list">
+        <p class="no-projects">No saved projects yet. Create your first beat!</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hidden file input for importing -->
+  <input type="file" id="import-file-input" accept=".json" style="display: none;">
+
+  <!-- Control Panel -->
+  <div class="control-panel">
+
+    <div class="control">
+      <label>Master</label>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+    </div>
+
+    <div class="control">
+      <label>Metronome</label>
+      <input type="range" id="metro-volume" min="0" max="1" step="0.01" value="0.5">
+    </div>
+
+    <div class="control">
+      <label>BPM <span id="bpm-value">120</span></label>
+      <input type="range" id="bpm" min="60" max="180" value="120">
+    </div>
+
+    <button id="metronome-toggle">Metronome</button>
+    <button id="record-toggle">⏺ Record</button>
+    <button id="loop-toggle">🔁 Loop</button>
+
+  </div>
+
+  <!-- Drum Pads Section -->
+  <div class="drum-section">
+    <h2 class="drum-section-title"><span class="icon-drums"></span>Drum Pads</h2>
+    <div class="drum-container">
+      <button class="kick" data-sound="kick">Kick<br><span>K</span></button>
+      <button class="snare" data-sound="snare">Snare<br><span>N</span></button>
+      <button class="hihat" data-sound="hihat">Hi-Hat<br><span>H</span></button>
+      <button class="openhat" data-sound="openhat">Open-Hat<br><span>P</span></button>
+      <button class="clap" data-sound="clap">Clap<br><span>L</span></button>
+      <button class="tom" data-sound="tom">Tom<br><span>M</span></button>
+      <button class="ride" data-sound="ride">Ride<br><span>J</span></button>
+      <button class="tink" data-sound="tink">Tink<br><span>I</span></button>
+    </div>
+  </div>
+
+  <!-- Instrument Section - Melodic instruments -->
+  <div class="instruments-section">
+    <h2>Instruments</h2>
+    <div class="instrument-selector">
+      <button class="instrument-btn active" data-instrument="bass"><span class="icon-bass-guitar"></span>Bass</button>
+      <button class="instrument-btn" data-instrument="keys"><span class="icon-piano"></span>Keys</button>
+      <button class="instrument-btn" data-instrument="lead"><span class="icon-synth"></span>Lead</button>
+    </div>
+    
+    <!-- Octave Control -->
+    <div class="octave-control">
+      <label>Octave: <span id="octave-value">3</span> <span class="keyboard-hint">(Keys: 1-6)</span></label>
+      <input type="range" id="octave-slider" min="1" max="6" value="3" step="1">
+      <div class="octave-markers">
+        <span>C1</span>
+        <span>C2</span>
+        <span>C3</span>
+        <span>C4</span>
+        <span>C5</span>
+        <span>C6</span>
+      </div>
+    </div>
+    
+    <!-- Piano-style keyboard -->
+    <div class="instrument-keyboard">
+      <div class="key-wrapper">
+        <button class="key white" data-note="C3" data-key="q">C<br><span>Q</span></button>
+        <button class="key black" data-note="C#3" data-key="w">C#<br><span>W</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="D3" data-key="e">D<br><span>E</span></button>
+        <button class="key black" data-note="D#3" data-key="r">D#<br><span>R</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="E3" data-key="t">E<br><span>T</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="F3" data-key="y">F<br><span>Y</span></button>
+        <button class="key black" data-note="F#3" data-key="u">F#<br><span>U</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="G3" data-key="a">G<br><span>A</span></button>
+        <button class="key black" data-note="G#3" data-key="s">G#<br><span>S</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="A3" data-key="d">A<br><span>D</span></button>
+        <button class="key black" data-note="A#3" data-key="f">A#<br><span>F</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="B3" data-key="g">B<br><span>G</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="C4" data-key="z">C<br><span>Z</span></button>
+        <button class="key black" data-note="C#4" data-key="x">C#<br><span>X</span></button>
+      </div>
+      <div class="key-wrapper">
+        <button class="key white" data-note="D4" data-key="c">D<br><span>C</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Effects Section -->
+  <div class="effects-section">
+    <h2>Effects</h2>
+    <div class="effects-controls">
+      <div class="effect-group">
+        <label>Reverb</label>
+        <input type="range" id="reverb" min="0" max="100" value="0">
+        <span class="effect-value" id="reverb-value">0%</span>
+      </div>
+      <div class="effect-group">
+        <label>Delay</label>
+        <input type="range" id="delay" min="0" max="100" value="0">
+        <span class="effect-value" id="delay-value">0%</span>
+      </div>
+      <div class="effect-group">
+        <label>Filter</label>
+        <input type="range" id="filter" min="0" max="100" value="50">
+        <span class="effect-value" id="filter-value">50%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sequencer Section -->
+  <div class="sequencer-section">
+    <div class="sequencer-header">
+      <h2>16-Step Sequencer</h2>
+      <div class="sequencer-controls">
+        <button id="play-sequence" class="seq-btn">▶ Play</button>
+        <button id="stop-sequence" class="seq-btn">⏹ Stop</button>
+        <button id="clear-sequence" class="seq-btn">Clear</button>
+      </div>
+    </div>
+    <div class="sequencer-grid" id="sequencer-grid">
+      <!-- Will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Bassline Section - Advanced bass sequencer for all genres -->
+  <div class="bassline-section">
+    <div class="bassline-header">
+      <h2><span class="icon-bass-guitar"></span>Bassline Sequencer</h2>
+      <div class="bassline-controls">
+        <button id="play-bassline" class="bass-btn"><span class="icon-play"></span>Play Bass</button>
+        <button id="stop-bassline" class="bass-btn"><span class="icon-stop"></span>Stop</button>
+        <button id="clear-bassline" class="bass-btn">Clear</button>
+      </div>
+    </div>
+
+    <!-- Genre Presets -->
+    <div class="bassline-presets">
+      <h3>Genre Presets</h3>
+      <div class="preset-buttons">
+        <button class="preset-btn" data-preset="trap"><span class="icon-explosion"></span>Trap 808</button>
+        <button class="preset-btn" data-preset="house"><span class="icon-piano"></span>House</button>
+        <button class="preset-btn" data-preset="dubstep"><span class="icon-lightning"></span>Dubstep</button>
+        <button class="preset-btn" data-preset="funk"><span class="icon-bass-guitar"></span>Funk</button>
+        <button class="preset-btn" data-preset="hiphop"><span class="icon-mic"></span>Hip-Hop</button>
+        <button class="preset-btn" data-preset="techno"><span class="icon-drums"></span>Techno</button>
+        <button class="preset-btn" data-preset="dnb"><span class="icon-trumpet"></span>DnB</button>
+        <button class="preset-btn" data-preset="jazz"><span class="icon-sax"></span>Jazz</button>
+      </div>
+    </div>
+
+    <!-- Bass Synth Controls -->
+    <div class="bass-synth-controls">
+      <div class="bass-control-group">
+        <label>Bass Type</label>
+        <select id="bass-type">
+          <option value="sub">Sub Bass (Deep)</option>
+          <option value="808">808 Bass (Trap)</option>
+          <option value="reese">Reese Bass (DnB)</option>
+          <option value="acid">Acid Bass (Techno)</option>
+          <option value="pluck">Pluck Bass (House)</option>
+          <option value="growl">Growl Bass (Dubstep)</option>
+        </select>
+      </div>
+      
+      <div class="bass-control-group">
+        <label>Octave</label>
+        <select id="bass-octave">
+          <option value="1">Octave 1 (Sub)</option>
+          <option value="2" selected>Octave 2 (Standard)</option>
+          <option value="3">Octave 3 (High)</option>
+        </select>
+      </div>
+
+      <div class="bass-control-group">
+        <label>Filter Cutoff: <span id="bass-cutoff-value">800Hz</span></label>
+        <input type="range" id="bass-cutoff" min="50" max="5000" value="800" step="10">
+      </div>
+
+      <div class="bass-control-group">
+        <label>Resonance: <span id="bass-resonance-value">5</span></label>
+        <input type="range" id="bass-resonance" min="0" max="30" value="5" step="0.5">
+      </div>
+
+      <div class="bass-control-group">
+        <label>Distortion: <span id="bass-distortion-value">0%</span></label>
+        <input type="range" id="bass-distortion" min="0" max="100" value="0">
+      </div>
+
+      <div class="bass-control-group">
+        <label>Glide: <span id="bass-glide-value">0ms</span></label>
+        <input type="range" id="bass-glide" min="0" max="200" value="0">
+      </div>
+    </div>
+
+    <!-- 16-Step Bass Sequencer Grid -->
+    <div class="bass-sequencer-grid">
+      <div class="bass-notes-column">
+        <div class="bass-note-label">C3</div>
+        <div class="bass-note-label">B2</div>
+        <div class="bass-note-label">A2</div>
+        <div class="bass-note-label">G2</div>
+        <div class="bass-note-label">F2</div>
+        <div class="bass-note-label">E2</div>
+        <div class="bass-note-label">D2</div>
+        <div class="bass-note-label">C2</div>
+        <div class="bass-note-label">B1</div>
+        <div class="bass-note-label">A1</div>
+        <div class="bass-note-label">G1</div>
+        <div class="bass-note-label">F1</div>
+        <div class="bass-note-label">E1</div>
+        <div class="bass-note-label">D1</div>
+        <div class="bass-note-label">C1</div>
+        <div class="bass-note-label">A0</div>
+      </div>
+      <div class="bass-grid-container" id="bass-grid">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Bass Pattern Bank -->
+    <div class="bass-pattern-bank">
+      <h3>Pattern Bank</h3>
+      <div class="pattern-slots">
+        <button class="pattern-slot active" data-slot="1">A</button>
+        <button class="pattern-slot" data-slot="2">B</button>
+        <button class="pattern-slot" data-slot="3">C</button>
+        <button class="pattern-slot" data-slot="4">D</button>
+      </div>
+      <div class="pattern-actions">
+        <button id="save-bass-pattern" class="pattern-action-btn"><span class="icon-save"></span>Save</button>
+        <button id="load-bass-pattern" class="pattern-action-btn"><span class="icon-folder"></span>Load</button>
+        <button id="copy-bass-pattern" class="pattern-action-btn"><span class="icon-copy"></span>Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Elements -->
+  <audio data-key="kick" src="sounds/kick.wav"></audio>
+  <audio data-key="snare" src="sounds/snare.wav"></audio>
+  <audio data-key="hihat" src="sounds/hihat.wav"></audio>
+  <audio data-key="openhat" src="sounds/openhat.wav"></audio>
+  <audio data-key="clap" src="sounds/clap.wav"></audio>
+  <audio data-key="tom" src="sounds/tom.wav"></audio>
+  <audio data-key="ride" src="sounds/ride.wav"></audio>
+  <audio data-key="tink" src="sounds/tink.wav"></audio>
+  <audio data-key="metronome" src="sounds/MPCMetronomeClick001.wav"></audio>
+
+  <!-- Mixer Section - Individual track controls for each sound -->
+  <div class="mixer-section">
+    <h2>Mixer - Track Controls</h2>
+    <div class="mixer-channels">
+      <!-- Kick Channel -->
+      <div class="mixer-channel">
+        <div class="channel-label">KICK</div>
+        <div class="channel-controls">
+          <div class="fader-container">
+            <label>Vol</label>
+            <input type="range" class="channel-volume" data-sound="kick" min="0" max="1" step="0.01" value="0.8" orient="vertical">
+            <span class="fader-value">80%</span>
+          </div>
+          <div class="pan-container">
+            <label>Pan</label>
+            <input type="range" class="channel-pan" data-sound="kick" min="-1" max="1" step="0.1" value="0">
+          </div>
+          <button class="mute-btn" data-sound="kick">M</button>
+          <button class="solo-btn" data-sound="kick">S</button>
+        </div>
+      </div>
+      
+      <!-- Snare Channel -->
+      <div class="mixer-channel">
+        <div class="channel-label">SNARE</div>
+        <div class="channel-controls">
+          <div class="fader-container">
+            <label>Vol</label>
+            <input type="range" class="channel-volume" data-sound="snare" min="0" max="1" step="0.01" value="0.8" orient="vertical">
+            <span class="fader-value">80%</span>
+          </div>
+          <div class="pan-container">
+            <label>Pan</label>
+            <input type="range" class="channel-pan" data-sound="snare" min="-1" max="1" step="0.1" value="0">
+          </div>
+          <button class="mute-btn" data-sound="snare">M</button>
+          <button class="solo-btn" data-sound="snare">S</button>
+        </div>
+      </div>
+      
+      <!-- Hi-Hat Channel -->
+      <div class="mixer-channel">
+        <div class="channel-label">HIHAT</div>
+        <div class="channel-controls">
+          <div class="fader-container">
+            <label>Vol</label>
+            <input type="range" class="channel-volume" data-sound="hihat" min="0" max="1" step="0.01" value="0.7" orient="vertical">
+            <span class="fader-value">70%</span>
+          </div>
+          <div class="pan-container">
+            <label>Pan</label>
+            <input type="range" class="channel-pan" data-sound="hihat" min="-1" max="1" step="0.1" value="0">
+          </div>
+          <button class="mute-btn" data-sound="hihat">M</button>
+          <button class="solo-btn" data-sound="hihat">S</button>
+        </div>
+      </div>
+      
+      <!-- Clap Channel -->
+      <div class="mixer-channel">
+        <div class="channel-label">CLAP</div>
+        <div class="channel-controls">
+          <div class="fader-container">
+            <label>Vol</label>
+            <input type="range" class="channel-volume" data-sound="clap" min="0" max="1" step="0.01" value="0.8" orient="vertical">
+            <span class="fader-value">80%</span>
+          </div>
+          <div class="pan-container">
+            <label>Pan</label>
+            <input type="range" class="channel-pan" data-sound="clap" min="-1" max="1" step="0.1" value="0">
+          </div>
+          <button class="mute-btn" data-sound="clap">M</button>
+          <button class="solo-btn" data-sound="clap">S</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQ Section - 3-band equalizer for master output -->
+  <div class="eq-section">
+    <h2>Master EQ</h2>
+    <div class="eq-controls">
+      <div class="eq-band">
+        <label>Low</label>
+        <input type="range" id="eq-low" min="-12" max="12" step="1" value="0" orient="vertical">
+        <span class="eq-value" id="eq-low-value">0dB</span>
+      </div>
+      <div class="eq-band">
+        <label>Mid</label>
+        <input type="range" id="eq-mid" min="-12" max="12" step="1" value="0" orient="vertical">
+        <span class="eq-value" id="eq-mid-value">0dB</span>
+      </div>
+      <div class="eq-band">
+        <label>High</label>
+        <input type="range" id="eq-high" min="-12" max="12" step="1" value="0" orient="vertical">
+        <span class="eq-value" id="eq-high-value">0dB</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Compressor/Limiter -->
+  <div class="compressor-section">
+    <h2>Master Compressor</h2>
+    <div class="compressor-controls">
+      <div class="comp-control">
+        <label>Threshold</label>
+        <input type="range" id="comp-threshold" min="-40" max="0" step="1" value="-20">
+        <span class="comp-value" id="comp-threshold-value">-20dB</span>
+      </div>
+      <div class="comp-control">
+        <label>Ratio</label>
+        <input type="range" id="comp-ratio" min="1" max="20" step="0.5" value="4">
+        <span class="comp-value" id="comp-ratio-value">4:1</span>
+      </div>
+      <div class="comp-control">
+        <label>Attack</label>
+        <input type="range" id="comp-attack" min="0" max="100" step="1" value="10">
+        <span class="comp-value" id="comp-attack-value">10ms</span>
+      </div>
+      <div class="comp-control">
+        <label>Release</label>
+        <input type="range" id="comp-release" min="10" max="1000" step="10" value="100">
+        <span class="comp-value" id="comp-release-value">100ms</span>
+      </div>
+    </div>
+    <button id="comp-toggle" class="comp-toggle">Compressor: OFF</button>
+  </div>
+
+  <!-- Footer with Copyright and Social Media -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="copyright">
+        <p><span class="copyright-small">&copy; 2025</span> <span class="name-gradient">Beatz by Elle</span><span class="copyright-small">. All Rights Reserved.</span></p>
+        <p class="tagline">Create. Mix. Share.</p>
+      </div>
+      <div class="social-media">
+        <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" class="social-svg">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" class="social-link twitter" title="Twitter/X">
+          <svg viewBox="0 0 24 24" class="social-svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener noreferrer" class="social-link youtube" title="YouTube">
+          <svg viewBox="0 0 24 24" class="social-svg">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+        <a href="https://soundcloud.com/yourprofile" target="_blank" rel="noopener noreferrer" class="social-link soundcloud" title="SoundCloud">
+          <svg viewBox="0 0 24 24" class="social-svg">
+            <path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.051 0-.091.037-.104.093L0 13.379l.172 1.233c.013.049.053.082.104.082.053 0 .09-.033.104-.082l.193-1.233-.193-1.233c-.014-.056-.053-.093-.104-.093m1.79-.938c-.058 0-.101.045-.115.107l-.195 2.223.195 2.111c.014.059.057.107.115.107.059 0 .104-.048.119-.107l.215-2.111-.215-2.223c-.015-.062-.061-.107-.119-.107m.891-.939c-.063 0-.114.051-.125.115l-.188 3.157.188 2.053c.011.063.062.113.125.113.064 0 .115-.05.125-.113l.211-2.053-.211-3.157c-.01-.064-.061-.115-.125-.115m.897-.896c-.068 0-.124.056-.138.124l-.179 4.053.179 1.977c.014.067.07.122.138.122.067 0 .122-.055.138-.122l.195-1.977-.195-4.053c-.016-.068-.071-.124-.138-.124m.896-.882c-.073 0-.132.058-.146.133l-.17 4.931.17 1.893c.014.074.073.132.146.132.074 0 .132-.058.148-.132l.186-1.893-.186-4.931c-.016-.075-.074-.133-.148-.133m.899-.818c-.078 0-.142.063-.158.141l-.162 5.749.162 1.814c.016.078.08.14.158.14.077 0 .141-.062.157-.14l.178-1.814-.178-5.749c-.016-.078-.08-.141-.157-.141m.896-.804c-.083 0-.151.068-.166.153l-.153 6.549.153 1.741c.015.085.083.152.166.152s.152-.067.166-.152l.17-1.741-.17-6.549c-.014-.085-.083-.153-.166-.153m.897-.779c-.089 0-.161.073-.178.163l-.144 7.326.144 1.672c.017.088.089.161.178.161.088 0 .161-.073.176-.161l.161-1.672-.161-7.326c-.015-.09-.088-.163-.176-.163m.964-.742c-.094 0-.17.076-.186.171l-.137 8.067.137 1.597c.016.095.092.17.186.17.095 0 .17-.075.186-.17l.154-1.597-.154-8.067c-.016-.095-.091-.171-.186-.171m.955-.717c-.099 0-.179.081-.196.181l-.13 8.783.13 1.529c.017.099.097.179.196.179.1 0 .179-.08.195-.179l.145-1.529-.145-8.783c-.016-.1-.095-.181-.195-.181m.964-.689c-.104 0-.188.084-.203.191l-.123 9.467.123 1.461c.015.105.099.189.203.189.105 0 .188-.084.202-.189l.137-1.461-.137-9.467c-.014-.107-.097-.191-.202-.191m.964-.646c-.11 0-.196.087-.212.199l-.115 10.109.115 1.396c.016.11.102.197.212.197.111 0 .197-.087.212-.197l.129-1.396-.129-10.109c-.015-.112-.101-.199-.212-.199m.964-.597c-.114 0-.206.093-.222.206l-.108 10.703.108 1.333c.016.114.108.206.222.206.115 0 .207-.092.223-.206l.121-1.333-.121-10.703c-.016-.113-.108-.206-.223-.206m.964-.547c-.119 0-.214.096-.23.215l-.101 11.247.101 1.271c.016.119.111.214.23.214.12 0 .215-.095.231-.214l.114-1.271-.114-11.247c-.016-.119-.111-.215-.231-.215m.964-.495c-.126 0-.223.1-.241.223l-.094 11.741.094 1.207c.018.124.115.223.241.223.125 0 .223-.099.241-.223l.105-1.207-.105-11.741c-.018-.123-.116-.223-.241-.223m.964-.445c-.131 0-.232.103-.25.234l-.086 12.184.086 1.145c.018.131.119.232.25.232.132 0 .233-.101.25-.232l.097-1.145-.097-12.184c-.017-.131-.118-.234-.25-.234m1.797-.43c-.137 0-.241.107-.259.244l-.079 12.612.079 1.078c.018.137.122.243.259.243.136 0 .24-.106.258-.243l.088-1.078-.088-12.612c-.018-.137-.122-.244-.258-.244m.964-.396c-.142 0-.249.112-.268.254l-.071 13.002.071 1.013c.019.142.126.253.268.253.143 0 .25-.111.269-.253l.079-1.013-.079-13.002c-.019-.142-.126-.254-.269-.254m.964-.351c-.147 0-.257.117-.277.264l-.063 13.339.063.949c.02.147.13.263.277.263.148 0 .258-.116.278-.263l.071-.949-.071-13.339c-.02-.147-.13-.264-.278-.264m.964-.31c-.152 0-.266.123-.286.276l-.055 13.623.055.886c.02.153.134.275.286.275.153 0 .266-.122.287-.275l.062-.886-.062-13.623c-.021-.153-.134-.276-.287-.276m.964-.263c-.158 0-.274.128-.295.289l-.047 13.855.047.823c.021.161.137.288.295.288.159 0 .275-.127.296-.288l.054-.823-.054-13.855c-.021-.161-.137-.289-.296-.289"/>
+          </svg>
+        </a>
+        <a href="https://tiktok.com/@yourhandle" target="_blank" rel="noopener noreferrer" class="social-link tiktok" title="TikTok">
+          <svg viewBox="0 0 24 24" class="social-svg">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cache busting: Add ?v= with timestamp to force reload on changes -->
+  <script src="script.js?v=20251222-59"></script>
+  <script src="project-manager.js?v=20251222-59"></script>
+</body>
+</html>

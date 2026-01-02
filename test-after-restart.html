@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Browser Test - After Restart</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .test-box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    h1 {
+      color: #667eea;
+      margin: 0 0 20px 0;
+    }
+    .status {
+      font-size: 3rem;
+      margin: 20px 0;
+    }
+    .time {
+      color: #666;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-box">
+    <h1>✅ Browser Working!</h1>
+    <div class="status">🎉</div>
+    <p>If you see this, your browser has successfully loaded the page.</p>
+    <p class="time" id="time"></p>
+    <hr style="margin: 20px 0;">
+    <p><strong>Next Step:</strong></p>
+    <p>Open <code>index.html</code> to use your beat machine.</p>
+  </div>
+  
+  <script>
+    document.getElementById('time').textContent = 'Loaded at: ' + new Date().toLocaleTimeString();
+  </script>
+</body>
+</html>

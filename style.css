@@ -1,0 +1,2581 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global text styling with black outlines */
+h1, h2, h3, h4, h5, h6, p, label, span, button, a, div {
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Global button optimization for instant response */
+button {
+  font-family: 'Rajdhani', sans-serif;
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1), 
+              background 0.05s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* BODY - Main container for the entire app */
+body {
+  min-height: 100vh; /* Full viewport height */
+  background: radial-gradient(ellipse at top, #1a1a2e 0%, #0f0f1a 50%, #000000 100%);
+  color: #e5e5e5;
+  font-family: 'Orbitron', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scroll if needed */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Changed from center to flex-start to allow scrolling */
+  padding: 20px;
+  padding-top: 40px; /* Extra space at top */
+}
+
+/* Subtle grid background */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0, 179, 164, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 179, 164, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* HEADPHONES ICON */
+.headphones-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.headband {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 4px solid #00b3a4;
+  border-bottom: none;
+  border-radius: 60px 60px 0 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 
+    0 0 20px rgba(0, 179, 164, 0.6),
+    inset 0 0 10px rgba(0, 179, 164, 0.3);
+  filter: drop-shadow(0 0 15px rgba(0, 179, 164, 0.4));
+}
+
+.headband::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, #00b3a4, transparent);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 179, 164, 0.8);
+}
+
+.ear-cup {
+  position: absolute;
+  width: 20px;
+  height: 28px;
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-radius: 8px;
+  bottom: 5px;
+  box-shadow: 
+    0 0 15px rgba(0, 179, 164, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.ear-cup.left {
+  left: 8px;
+}
+
+.ear-cup.right {
+  right: 8px;
+}
+
+.ear-cup::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* TITLE */
+h1 {
+  font-weight: 900;
+  font-size: 56px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 100px;
+  position: relative;
+  color: transparent;
+  -webkit-text-stroke: 2px #ff1493;
+  text-shadow: 
+    /* Pink outline effect */
+    -1px -1px 0 rgba(255, 20, 147, 0.8),
+    1px -1px 0 rgba(255, 20, 147, 0.8),
+    -1px 1px 0 rgba(255, 20, 147, 0.8),
+    1px 1px 0 rgba(255, 20, 147, 0.8),
+    /* Cyan glow */
+    0 0 20px rgba(0, 217, 199, 0.8),
+    0 0 40px rgba(0, 217, 199, 0.5),
+    0 0 60px rgba(0, 217, 199, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.9);
+  filter: drop-shadow(0 0 30px rgba(0, 217, 199, 0.8));
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #00d9c7, #00b3a4, #00d9c7, transparent);
+  box-shadow: 
+    0 0 20px rgba(0, 217, 199, 0.8),
+    0 0 40px rgba(0, 217, 199, 0.5);
+  border-radius: 2px;
+}
+
+/* DRUM SECTION - Wrapper for drum pads with title */
+.drum-section {
+  width: 100%;
+  max-width: 95vw;
+  margin-bottom: 20px;
+  padding: 25px 20px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.drum-section-title {
+  margin: 0 0 20px 0;
+  color: #00d9c7;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(0, 217, 199, 0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* DRUM GRID - Container for all 8 drum pads */
+.drum-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(100px, 140px)); /* 4 columns, flexible between 100-140px */
+  gap: 12px; /* Space between pads */
+  margin-bottom: 30px;
+  padding: 24px; /* Reduced padding */
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  max-width: 95vw; /* Don't exceed 95% of viewport width */
+  box-sizing: border-box; /* Include padding in width */
+  justify-content: center; /* Center the pads */
+}
+
+/* DRUM PADS */
+.drum-container button {
+  height: 110px;
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #00d9c7;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.05s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(255, 182, 193, 0.3),
+    inset 0 0 40px rgba(255, 182, 193, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 182, 193, 0.6);
+  will-change: transform, box-shadow;
+}
+
+.drum-container button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(0, 179, 164, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.drum-container button:hover {
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-color: #00d9c7;
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(255, 182, 193, 0.5),
+    inset 0 0 60px rgba(255, 182, 193, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.drum-container button:hover::before {
+  opacity: 1;
+}
+
+.drum-container button span {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #00b3a4;
+  margin-top: 8px;
+  text-shadow: 0 0 10px rgba(0, 179, 164, 0.7);
+  letter-spacing: 2px;
+}
+
+/* ACTIVE PAD */
+.drum-container button.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  color: #000;
+  box-shadow: 
+    0 0 25px rgba(0, 179, 164, 0.8),
+    0 0 50px rgba(0, 179, 164, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  transform: scale(0.96);
+}
+
+.drum-container button.active::before {
+  opacity: 0;
+}
+
+.drum-container button.active span {
+  color: #000;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* METRONOME PULSE */
+.drum-container button.pulse {
+  box-shadow: 
+    inset 0 0 0 2px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* CONTROL PANEL - Bottom control bar with volume, BPM, and transport buttons */
+.control-panel {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap */
+  padding: 25px; /* Reduced padding */
+  margin-bottom: 20px;
+  background: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  max-width: 95vw; /* Don't exceed viewport width */
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  justify-content: center; /* Center items */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* INDIVIDUAL CONTROL - Single slider control (Master, Metronome, BPM) */
+.control {
+  display: flex;
+  flex-direction: column; /* Stack label and slider vertically */
+  font-size: 10px; /* Smaller font */
+  color: #00b3a4;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 100px; /* Minimum width for usability */
+}
+
+/* CONTROL LABEL - Text above each slider */
+.control label {
+  margin-bottom: 6px; /* Space between label and slider */
+  text-shadow: 0 0 8px rgba(0, 179, 164, 0.3);
+}
+
+/* SLIDERS */
+input[type="range"] {
+  width: 120px;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(90deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #333;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 
+    0 2px 8px rgba(0, 179, 164, 0.4),
+    0 0 12px rgba(0, 179, 164, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.1s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: linear-gradient(145deg, #00e6d6 0%, #00d4c4 100%);
+  box-shadow: 
+    0 2px 12px rgba(0, 179, 164, 0.6),
+    0 0 16px rgba(0, 179, 164, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 
+    0 2px 8px rgba(0, 179, 164, 0.4),
+    0 0 12px rgba(0, 179, 164, 0.3);
+  transition: all 0.1s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background: linear-gradient(145deg, #00e6d6 0%, #00d4c4 100%);
+  box-shadow: 
+    0 2px 12px rgba(0, 179, 164, 0.6),
+    0 0 16px rgba(0, 179, 164, 0.5);
+  transform: scale(1.1);
+}
+
+/* METRONOME BUTTON */
+#metronome-toggle {
+  padding: 12px 20px;
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+#metronome-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, rgba(0, 179, 164, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+#metronome-toggle:hover {
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-color: #444;
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+#metronome-toggle:hover::before {
+  opacity: 1;
+}
+
+#metronome-toggle:active {
+  transform: scale(0.98);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#metronome-toggle.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  color: #000;
+  box-shadow: 
+    0 0 20px rgba(0, 179, 164, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* SEQUENCER SECTION - Container for the 16-step beat grid */
+.sequencer-section {
+  width: 100%; /* Full width of parent */
+  max-width: 95vw; /* Maximum 95% of viewport width to prevent overflow */
+  margin-bottom: 20px;
+  padding: 25px; /* Reduced padding */
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* SEQUENCER HEADER - Title and control buttons at top of sequencer */
+.sequencer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 10px; /* Space between items when wrapped */
+}
+
+/* SEQUENCER TITLE - "16-Step Sequencer" heading */
+.sequencer-header h2 {
+  font-size: 16px; /* Slightly smaller for space */
+  color: #00b3a4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 179, 164, 0.4);
+  margin: 0; /* Remove default margin */
+}
+
+/* SEQUENCER CONTROL BUTTONS - Play, Stop, Clear buttons */
+.sequencer-controls {
+  display: flex;
+  gap: 8px; /* Space between buttons */
+}
+
+/* INDIVIDUAL SEQUENCER BUTTON STYLE */
+.seq-btn {
+  padding: 6px 12px; /* Smaller padding */
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  color: #fff;
+  font-weight: 600;
+  font-size: 10px; /* Smaller text */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease; /* Smooth hover effect */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* SEQUENCER BUTTON HOVER STATE */
+.seq-btn:hover {
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-color: #444;
+}
+
+/* SEQUENCER BUTTON ACTIVE STATE - When playing/recording */
+.seq-btn.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 179, 164, 0.6);
+}
+
+/* SEQUENCER GRID - The main beat programming grid */
+.sequencer-grid {
+  display: grid;
+  /* First column for labels, then 16 equal columns for steps */
+  grid-template-columns: 60px repeat(16, 1fr); /* Label column + 16 flexible step columns */
+  gap: 3px; /* Space between grid items */
+  padding: 12px; /* Inner padding */
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  overflow-x: auto; /* Allow horizontal scroll if needed */
+  max-width: 100%; /* Don't exceed container width */
+}
+
+/* TRACK LABEL - Labels for each instrument row (Kick, Snare, etc.) */
+.track-label {
+  display: flex;
+  align-items: center; /* Vertically center text */
+  justify-content: flex-start; /* Align text to left */
+  font-size: 10px; /* Smaller font for space */
+  color: #00b3a4;
+  font-weight: 600;
+  padding: 0 4px; /* Side padding */
+  text-transform: uppercase;
+  white-space: nowrap; /* Keep text on one line */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ... if text too long */
+}
+
+/* STEP BUTTON - Individual beat squares in the grid */
+.step {
+  width: 100%; /* Fill grid cell */
+  min-width: 30px; /* Minimum width to stay clickable */
+  height: 35px; /* Fixed height */
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px; /* Smaller radius */
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+/* STEP HOVER STATE - Visual feedback when hovering */
+.step:hover {
+  background: #252525;
+  border-color: #444;
+}
+
+/* STEP ACTIVE STATE - When a step is programmed to play */
+.step.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  box-shadow: 
+    0 0 15px rgba(0, 179, 164, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* STEP PLAYING STATE - Visual indicator for currently playing step */
+.step.playing {
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.8),
+    inset 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* EFFECTS SECTION - Container for audio effects controls */
+.effects-section {
+  width: 100%; /* Full width */
+  max-width: 95vw; /* Maximum 95% of viewport width */
+  margin-bottom: 20px;
+  padding: 25px; /* Reduced padding */
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* EFFECTS TITLE - "Effects" heading */
+.effects-section h2 {
+  font-size: 16px; /* Slightly smaller */
+  color: #00b3a4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 179, 164, 0.4);
+  margin-bottom: 20px;
+}
+
+/* EFFECTS CONTROLS GRID - Container for all effect knobs */
+.effects-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid that fits available space */
+  gap: 15px; /* Space between effect controls */
+  width: 100%;
+}
+
+/* INDIVIDUAL EFFECT GROUP - Single effect control (Reverb, Delay, Filter) */
+.effect-group {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center horizontally */
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 1px solid #222;
+}
+
+/* EFFECT LABEL - Name of the effect */
+.effect-group label {
+  font-size: 12px;
+  color: #00b3a4;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 8px rgba(0, 179, 164, 0.3);
+}
+
+/* EFFECT SLIDER - Range input for effect intensity */
+.effect-group input[type="range"] {
+  width: 100%; /* Full width of container */
+  margin-bottom: 8px;
+}
+
+/* EFFECT VALUE DISPLAY - Shows percentage (0%, 50%, 100%) */
+.effect-value {
+  font-size: 11px;
+  color: #888;
+  font-weight: 600;
+}
+
+/* CONTROL PANEL TRANSPORT BUTTONS - Record and Loop buttons styling */
+#record-toggle,
+#loop-toggle {
+  padding: 10px 16px; /* Slightly smaller padding */
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px; /* Smaller text */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  white-space: nowrap; /* Keep text on one line */
+}
+
+/* TRANSPORT BUTTONS HOVER STATE */
+#record-toggle:hover,
+#loop-toggle:hover {
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-color: #444;
+}
+
+/* RECORD BUTTON ACTIVE STATE - Red pulsing when recording */
+#record-toggle.active {
+  background: linear-gradient(145deg, #ff4444 0%, #cc0000 100%);
+  border-color: #ff6666;
+  color: #fff;
+  box-shadow: 
+    0 0 20px rgba(255, 68, 68, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: record-pulse 1s ease-in-out infinite; /* Pulsing animation */
+}
+
+/* LOOP BUTTON ACTIVE STATE - Cyan when looping */
+#loop-toggle.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 179, 164, 0.6);
+}
+
+/* RECORD PULSE ANIMATION - Makes record button fade in/out when active */
+@keyframes record-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ============================================
+   PRODUCER ELEMENTS STYLING
+   ============================================ */
+
+/* SAMPLE BANK SECTION - Sound pack selector at the top */
+.sample-bank-section {
+  width: 100%;
+  max-width: 95vw;
+  margin-bottom: 25px;
+  padding: 16px 20px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Sample Bank Title */
+.sample-bank-section h2 {
+  font-size: 14px;
+  color: #00b3a4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+/* Bank Button Container */
+.bank-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Individual Bank Button - For switching sound packs */
+.bank-btn {
+  padding: 10px 20px;
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* Bank Button Hover State */
+.bank-btn:hover {
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-color: #00b3a4;
+}
+
+/* Bank Button Active State - Currently selected sound pack */
+.bank-btn.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 179, 164, 0.6);
+}
+
+/* MIXER SECTION - Professional mixing console for individual tracks */
+.mixer-section {
+  width: 100%;
+  max-width: 95vw;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+}
+
+/* Mixer Title */
+.mixer-section h2 {
+  font-size: 16px;
+  color: #00b3a4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(0, 179, 164, 0.4);
+}
+
+/* Mixer Channels Container - Holds all individual channel strips */
+.mixer-channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid */
+  gap: 15px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+/* Individual Mixer Channel Strip - One column per sound */
+.mixer-channel {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  padding: 12px 8px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 10px;
+  border: 1px solid #222;
+}
+
+/* Channel Label - Name of the sound (KICK, SNARE, etc.) */
+.channel-label {
+  font-size: 10px;
+  color: #00b3a4;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 8px rgba(0, 179, 164, 0.3);
+}
+
+/* Channel Controls Container */
+.channel-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Volume Fader Container */
+.fader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Fader Label */
+.fader-container label {
+  font-size: 9px;
+  color: #888;
+  font-weight: 600;
+}
+
+/* Fader Value Display - Shows percentage */
+.fader-value {
+  font-size: 9px;
+  color: #00b3a4;
+  font-weight: 600;
+}
+
+/* Pan Control Container - Left/Right stereo positioning */
+.pan-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+/* Pan Label */
+.pan-container label {
+  font-size: 9px;
+  color: #888;
+  font-weight: 600;
+}
+
+/* Pan Slider - Controls stereo position */
+.channel-pan {
+  width: 80%;
+}
+
+/* Mute and Solo Buttons - Common styling */
+.mute-btn,
+.solo-btn {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  color: #888;
+  font-weight: 700;
+  font-size: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* Mute Button Hover */
+.mute-btn:hover {
+  border-color: #ff6666;
+  color: #ff6666;
+}
+
+/* Mute Button Active State - Red when muted */
+.mute-btn.active {
+  background: linear-gradient(145deg, #ff4444 0%, #cc0000 100%);
+  border-color: #ff6666;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+}
+
+/* Solo Button Hover */
+.solo-btn:hover {
+  border-color: #ffaa00;
+  color: #ffaa00;
+}
+
+/* Solo Button Active State - Orange when soloed */
+.solo-btn.active {
+  background: linear-gradient(145deg, #ffaa00 0%, #ff8800 100%);
+  border-color: #ffcc00;
+  color: #000;
+  box-shadow: 0 0 15px rgba(255, 170, 0, 0.6);
+}
+
+/* EQ SECTION - 3-band equalizer */
+.eq-section {
+  width: 100%;
+  max-width: 95vw;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+}
+
+/* EQ Title */
+.eq-section h2 {
+  font-size: 16px;
+  color: #00b3a4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 179, 164, 0.4);
+}
+
+/* EQ Controls Container */
+.eq-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns for Low/Mid/High */
+  gap: 20px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+/* Individual EQ Band - Low, Mid, or High frequency control */
+.eq-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 10px;
+  border: 1px solid #222;
+}
+
+/* EQ Band Label */
+.eq-band label {
+  font-size: 12px;
+  color: #00b3a4;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 8px rgba(0, 179, 164, 0.3);
+}
+
+/* EQ Value Display - Shows dB value */
+.eq-value {
+  font-size: 11px;
+  color: #888;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* COMPRESSOR SECTION - Master dynamics control */
+.compressor-section {
+  width: 100%;
+  max-width: 95vw;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+}
+
+/* Compressor Title */
+.compressor-section h2 {
+  font-size: 16px;
+  color: #00b3a4;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 179, 164, 0.4);
+}
+
+/* Compressor Controls Container */
+.compressor-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  gap: 15px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* Individual Compressor Control - Threshold, Ratio, Attack, Release */
+.comp-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 10px;
+  border: 1px solid #222;
+}
+
+/* Compressor Control Label */
+.comp-control label {
+  font-size: 11px;
+  color: #00b3a4;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px rgba(0, 179, 164, 0.3);
+}
+
+/* Compressor Value Display */
+.comp-value {
+  font-size: 10px;
+  color: #888;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Compressor Toggle Button - Turns compressor on/off */
+.comp-toggle {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* Compressor Toggle Hover */
+.comp-toggle:hover {
+  background: linear-gradient(145deg, #333 0%, #222 100%);
+  border-color: #444;
+}
+
+/* Compressor Toggle Active State - Cyan when ON */
+.comp-toggle.active {
+  background: linear-gradient(145deg, #00d4c4 0%, #00b3a4 100%);
+  border-color: #00e6d6;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 179, 164, 0.6);
+}
+
+/* ============================================
+   INSTRUMENTS SECTION - Melodic instruments
+   ============================================ */
+
+/* Container for instrument controls */
+.instruments-section {
+  margin: 20px auto;
+  padding: 25px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 95vw;
+}
+
+.instruments-section h2 {
+  margin: 0 0 20px 0;
+  color: #00b3a4;
+  font-size: 1.3rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Instrument selector buttons */
+.instrument-selector {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.instrument-btn {
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(0, 179, 164, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.instrument-btn:hover {
+  background: rgba(0, 179, 164, 0.2);
+  border-color: #00b3a4;
+  transform: translateY(-2px);
+}
+
+.instrument-btn.active {
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border-color: #00d9c7;
+  box-shadow: 0 0 20px rgba(0, 179, 164, 0.5);
+}
+
+/* Piano-style keyboard */
+.instrument-keyboard {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  min-height: 220px;
+}
+
+.key-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* White keys */
+.key.white {
+  width: 60px;
+  height: 180px;
+  background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+  border: 2px solid #333;
+  border-radius: 0 0 8px 8px;
+  color: #333;
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.05s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 15px;
+  will-change: transform, background;
+  margin: 0;
+}
+
+.key.white span {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 5px;
+  font-weight: 700;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.key.white:hover {
+  background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.key.white:active,
+.key.white.active {
+  background: linear-gradient(180deg, #00b3a4 0%, #008f82 100%);
+  color: #fff;
+  transform: translateY(2px);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Black keys */
+.key.black {
+  width: 40px;
+  height: 110px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%);
+  border: 2px solid #000;
+  border-radius: 0 0 6px 6px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.05s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 12px;
+  right: -20px;
+  top: 0;
+  z-index: 2;
+  will-change: transform, background;
+}
+
+.key.black span {
+  font-size: 1rem;
+  color: #aaa;
+  margin-top: 3px;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.key.black:hover {
+  background: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.key.black:active,
+.key.black.active {
+  background: linear-gradient(180deg, #00d9c7 0%, #00b3a4 100%);
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive adjustments for instruments */
+@media (max-width: 768px) {
+  .instrument-keyboard {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  
+  .key.white {
+    min-width: 50px;
+    height: 140px;
+  }
+  
+  .key.black {
+    min-width: 38px;
+    height: 90px;
+  }
+}
+
+/* ============================================
+   BASSLINE SEQUENCER SECTION
+   ============================================ */
+
+/* Main bassline container */
+.bassline-section {
+  margin: 30px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 179, 164, 0.3);
+  border: 1px solid rgba(0, 179, 164, 0.2);
+  max-width: 95vw;
+}
+
+.bassline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.bassline-header h2 {
+  margin: 0 auto 0 0;
+  color: #00d9c7;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(0, 217, 199, 0.6);
+  width: 100%;
+  text-align: center;
+}
+
+.bassline-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.bass-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border: 2px solid rgba(0, 217, 199, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.bass-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 217, 199, 0.5);
+  border-color: #00d9c7;
+}
+
+.bass-btn:active {
+  transform: translateY(0);
+}
+
+/* Genre Presets */
+.bassline-presets {
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.bassline-presets h3 {
+  margin: 0 0 15px 0;
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.preset-btn {
+  padding: 12px;
+  background: rgba(0, 179, 164, 0.1);
+  border: 2px solid rgba(0, 179, 164, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background: rgba(0, 179, 164, 0.2);
+  border-color: #00b3a4;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 179, 164, 0.3);
+}
+
+.preset-btn.active {
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border-color: #00d9c7;
+  box-shadow: 0 0 20px rgba(0, 217, 199, 0.6);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Bass Synth Controls */
+.bass-synth-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.bass-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bass-control-group label {
+  color: #00d9c7;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 217, 199, 0.4);
+}
+
+.bass-control-group select,
+.bass-control-group input[type="range"] {
+  padding: 8px;
+  background: rgba(0, 179, 164, 0.1);
+  border: 1px solid rgba(0, 179, 164, 0.3);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.bass-control-group select:focus,
+.bass-control-group input[type="range"]:focus {
+  outline: none;
+  border-color: #00d9c7;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.3);
+}
+
+.bass-control-group select {
+  cursor: pointer;
+}
+
+.bass-control-group select option {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+/* Bass Sequencer Grid */
+.bass-sequencer-grid {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.bass-notes-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 5px 0;
+}
+
+.bass-note-label {
+  height: 30px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 179, 164, 0.2);
+  border: 1px solid rgba(0, 179, 164, 0.4);
+  border-radius: 5px;
+  color: #00d9c7;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-shadow: 0 0 8px rgba(0, 217, 199, 0.5);
+}
+
+.bass-grid-container {
+  display: grid;
+  grid-template-columns: repeat(16, 45px);
+  grid-template-rows: repeat(16, 30px);
+  gap: 4px;
+  flex: 1;
+}
+
+.bass-step-cell {
+  background: rgba(0, 179, 164, 0.05);
+  border: 2px solid rgba(0, 179, 164, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.bass-step-cell:hover {
+  background: rgba(0, 179, 164, 0.2);
+  border-color: #00b3a4;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 179, 164, 0.3);
+}
+
+.bass-step-cell.active {
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border-color: #00d9c7;
+  box-shadow: 0 0 15px rgba(0, 217, 199, 0.6);
+}
+
+.bass-step-cell.playing {
+  animation: bassPulse 0.3s ease;
+}
+
+@keyframes bassPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* Highlight current step column */
+.bass-step-cell.current-step {
+  border-color: #00d9c7;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.5);
+}
+
+/* Bass Pattern Bank */
+.bass-pattern-bank {
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.bass-pattern-bank h3 {
+  margin: 0 0 15px 0;
+  color: #00d9c7;
+  font-size: 1.3rem;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(0, 217, 199, 0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pattern-slots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.pattern-slot {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 179, 164, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pattern-slot:hover {
+  background: rgba(0, 179, 164, 0.2);
+  border-color: #00b3a4;
+  box-shadow: 0 0 10px rgba(0, 179, 164, 0.3);
+}
+
+.pattern-slot.active {
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border-color: #00d9c7;
+  box-shadow: 0 0 15px rgba(0, 217, 199, 0.5);
+}
+
+.pattern-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pattern-action-btn {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 179, 164, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pattern-action-btn:hover {
+  background: rgba(0, 179, 164, 0.2);
+  border-color: #00b3a4;
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(0, 179, 164, 0.3);
+}
+
+/* ============================================
+   CUSTOM NEON ICONS - Replace emojis with CSS designs
+   ============================================ */
+
+/* Base icon styling */
+[class^="icon-"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-right: 8px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Bass Guitar Icon */
+.icon-bass-guitar::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 6px;
+  background: #00d9c7;
+  border-radius: 3px 8px 8px 3px;
+  top: 7px;
+  left: 3px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.8);
+}
+
+.icon-bass-guitar::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: #00d9c7;
+  top: 9px;
+  left: -2px;
+  box-shadow: 0 0 8px rgba(0, 217, 199, 0.6);
+}
+
+/* Piano/Keys Icon */
+.icon-piano::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 14px;
+  border: 2px solid #00d9c7;
+  border-radius: 3px;
+  top: 3px;
+  left: 2px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+  background: linear-gradient(90deg, transparent 0%, transparent 30%, #00d9c7 30%, #00d9c7 32%, transparent 32%, transparent 48%, #00d9c7 48%, #00d9c7 50%, transparent 50%, transparent 68%, #00d9c7 68%, #00d9c7 70%, transparent 70%);
+}
+
+/* Synth/Lead Icon */
+.icon-synth::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 12px;
+  background: linear-gradient(135deg, transparent 30%, #00d9c7 30%, #00d9c7 35%, transparent 35%, transparent 55%, #00d9c7 55%, #00d9c7 60%, transparent 60%);
+  top: 4px;
+  left: 2px;
+  filter: drop-shadow(0 0 8px rgba(0, 217, 199, 0.8));
+}
+
+.icon-synth::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00d9c7;
+  top: 12px;
+  left: 4px;
+  box-shadow: 0 0 6px rgba(0, 217, 199, 0.8), 6px 0 0 #00d9c7, 6px 0 6px rgba(0, 217, 199, 0.8);
+}
+
+/* Play Icon */
+.icon-play::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 12px solid #00d9c7;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  top: 3px;
+  left: 5px;
+  filter: drop-shadow(0 0 10px rgba(0, 217, 199, 0.8));
+}
+
+/* Stop Icon */
+.icon-stop::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #00d9c7;
+  border-radius: 2px;
+  top: 4px;
+  left: 4px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.8);
+}
+
+/* Fire Icon */
+.icon-fire::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: #00d9c7;
+  border-radius: 50% 50% 0 0;
+  top: 3px;
+  left: 5px;
+  clip-path: polygon(50% 0%, 80% 40%, 100% 100%, 0% 100%, 20% 40%);
+  box-shadow: 0 0 12px rgba(0, 217, 199, 0.9);
+}
+
+.icon-fire::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  background: rgba(0, 217, 199, 0.5);
+  border-radius: 50%;
+  top: 7px;
+  left: 7px;
+  box-shadow: 0 0 8px rgba(0, 217, 199, 0.6);
+}
+
+/* House Icon */
+.icon-house::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  border: 2px solid #00d9c7;
+  border-top: none;
+  top: 8px;
+  left: 4px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-house::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #00d9c7;
+  top: 2px;
+  left: 2px;
+  filter: drop-shadow(0 0 10px rgba(0, 217, 199, 0.8));
+}
+
+/* Explosion Icon */
+.icon-explosion::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #00d9c7;
+  border-radius: 50%;
+  top: 6px;
+  left: 6px;
+  box-shadow: 
+    0 0 15px rgba(0, 217, 199, 1),
+    -6px -4px 0 -2px #00d9c7,
+    6px -4px 0 -2px #00d9c7,
+    -6px 4px 0 -2px #00d9c7,
+    6px 4px 0 -2px #00d9c7,
+    -8px 0 0 -2px #00d9c7,
+    8px 0 0 -2px #00d9c7,
+    0 -6px 0 -2px #00d9c7,
+    0 6px 0 -2px #00d9c7;
+}
+
+/* Saxophone Icon */
+.icon-sax::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border: 2px solid #00d9c7;
+  border-radius: 0 0 6px 8px;
+  top: 4px;
+  left: 6px;
+  transform: rotate(-15deg);
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-sax::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border: 2px solid #00d9c7;
+  border-radius: 50%;
+  top: 1px;
+  left: 8px;
+  box-shadow: 0 0 8px rgba(0, 217, 199, 0.8);
+}
+
+/* Microphone Icon */
+.icon-mic::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #00d9c7;
+  border-radius: 3px 3px 0 0;
+  top: 2px;
+  left: 7px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-mic::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  border: 2px solid #00d9c7;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  top: 10px;
+  left: 5px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+/* Lightning Icon */
+.icon-lightning::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 10px solid #00d9c7;
+  top: 2px;
+  left: 7px;
+  filter: drop-shadow(0 0 12px rgba(0, 217, 199, 0.9));
+}
+
+.icon-lightning::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid #00d9c7;
+  top: 8px;
+  left: 5px;
+  filter: drop-shadow(0 0 12px rgba(0, 217, 199, 0.9));
+}
+
+/* Drums Icon */
+.icon-drums::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 8px;
+  border: 2px solid #00d9c7;
+  border-radius: 2px;
+  top: 6px;
+  left: 5px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-drums::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 2px solid #00d9c7;
+  border-radius: 50%;
+  top: 2px;
+  left: 9px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+/* Trumpet Icon */
+.icon-trumpet::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 2px solid #00d9c7;
+  border-left: none;
+  border-radius: 0 50% 50% 0;
+  top: 7px;
+  left: 10px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-trumpet::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 3px;
+  background: #00d9c7;
+  border-radius: 2px;
+  top: 8px;
+  left: 3px;
+  box-shadow: 0 0 8px rgba(0, 217, 199, 0.8);
+}
+
+/* Save Icon (Floppy Disk) */
+.icon-save::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  border: 2px solid #00d9c7;
+  border-radius: 2px;
+  top: 3px;
+  left: 4px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-save::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 4px;
+  background: #00d9c7;
+  border-radius: 1px;
+  top: 5px;
+  left: 6px;
+  box-shadow: 0 0 8px rgba(0, 217, 199, 0.8);
+}
+
+/* Folder Icon */
+.icon-folder::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 10px;
+  border: 2px solid #00d9c7;
+  border-radius: 0 2px 2px 2px;
+  top: 6px;
+  left: 3px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-folder::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 3px;
+  background: #00d9c7;
+  border-radius: 2px 2px 0 0;
+  top: 3px;
+  left: 3px;
+  box-shadow: 0 0 8px rgba(0, 217, 199, 0.8);
+}
+
+/* Copy Icon */
+.icon-copy::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  border: 2px solid #00d9c7;
+  border-radius: 2px;
+  top: 2px;
+  left: 4px;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+.icon-copy::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  border: 2px solid #00d9c7;
+  border-radius: 2px;
+  top: 4px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+}
+
+/* ============================================
+   BUTTON FONT OVERRIDE - Different futuristic font for buttons
+   ============================================ */
+
+/* Apply Rajdhani to all buttons and interactive controls */
+button,
+.bass-btn,
+.preset-btn,
+.pattern-action-btn,
+.pattern-slot,
+.instrument-btn,
+.seq-btn,
+.bank-btn,
+.mute-btn,
+.solo-btn,
+.comp-toggle,
+#metronome-toggle,
+#record-toggle,
+#loop-toggle {
+  font-family: 'Rajdhani', 'Orbitron', system-ui, sans-serif !important;
+  letter-spacing:  1.5px;
+}
+
+/* FOOTER - Copyright and Social Media */
+.footer {
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 60px;
+  padding: 30px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-top: 2px solid rgba(0, 217, 199, 0.3);
+  border-radius: 12px 12px 0 0;
+  backdrop-filter: blur(10px);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.copyright {
+  text-align: left;
+}
+
+.copyright p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #e5e5e5;
+}
+
+.copyright-small {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.name-gradient {
+  background: linear-gradient(90deg, 
+    #ff1493 0%,      /* Neon Pink */
+    #ff6b35 25%,     /* Neon Orange */
+    #a855f7 50%,     /* Neon Purple */
+    #ff1493 75%,     /* Back to Neon Pink */
+    #ff6b35 100%     /* End with Neon Orange */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  text-shadow: none;
+  filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.6))
+          drop-shadow(0 0 20px rgba(168, 85, 247, 0.4))
+          drop-shadow(0 0 15px rgba(255, 107, 53, 0.5));
+}
+
+.tagline {
+  font-size: 0.95rem;
+  color: #00d9c7;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 8px;
+  text-shadow: 0 0 10px rgba(0, 217, 199, 0.8),
+               0 0 20px rgba(0, 217, 199, 0.5),
+               1px 1px 2px rgba(0, 0, 0, 0.8);
+  animation: taglinePulse 3s ease-in-out infinite;
+}
+
+@keyframes taglinePulse {
+  0%, 100% { 
+    text-shadow: 0 0 10px rgba(0, 217, 199, 0.8),
+                 0 0 20px rgba(0, 217, 199, 0.5),
+                 1px 1px 2px rgba(0, 0, 0, 0.8);
+  }
+  50% { 
+    text-shadow: 0 0 15px rgba(0, 217, 199, 1),
+                 0 0 30px rgba(0, 217, 199, 0.7),
+                 1px 1px 2px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.social-media {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0, 217, 199, 0.1);
+  border: 2px solid rgba(0, 217, 199, 0.3);
+  border-radius: 50%;
+  color: #e5e5e5;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
+  width: 50px;
+  height: 50px;
+}
+
+.social-link:hover {
+  background: rgba(0, 217, 199, 0.2);
+  border-color: rgba(0, 217, 199, 0.6);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 217, 199, 0.3);
+}
+
+.social-svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.social-icon {
+  font-size: 1.3rem;
+}
+
+.social-name {
+  font-size: 0.95rem;
+}
+
+/* Specific social media colors on hover */
+.social-link.instagram:hover {
+  border-color: #E1306C;
+  box-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
+  color: #E1306C;
+}
+
+.social-link.twitter:hover {
+  border-color: #1DA1F2;
+  box-shadow: 0 5px 15px rgba(29, 161, 242, 0.3);
+  color: #1DA1F2;
+}
+
+.social-link.youtube:hover {
+  border-color: #FF0000;
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+  color: #FF0000;
+}
+
+.social-link.soundcloud:hover {
+  border-color: #FF5500;
+  box-shadow: 0 5px 15px rgba(255, 85, 0, 0.3);
+  color: #FF5500;
+}
+
+.social-link.tiktok:hover {
+  border-color: #00F2EA;
+  box-shadow: 0 5px 15px rgba(0, 242, 234, 0.3);
+  color: #00F2EA;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .copyright {
+    text-align: center;
+  }
+  
+  .social-media {
+    justify-content: center;
+  }
+}
+
+/* Octave Control */
+.octave-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 179, 164, 0.3);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.octave-control label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00d9c7;
+  letter-spacing: 2px;
+}
+
+.keyboard-hint {
+  font-size: 0.85rem;
+  color: rgba(0, 217, 199, 0.6);
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-left: 10px;
+}
+
+#octave-value {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+#octave-slider {
+  width: 100%;
+  max-width: 500px;
+  height: 8px;
+  background: rgba(0, 179, 164, 0.2);
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+#octave-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border: 2px solid #00d9c7;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+  transition: all 0.2s ease;
+}
+
+#octave-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(0, 217, 199, 0.8);
+}
+
+#octave-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(145deg, #00b3a4, #00d9c7);
+  border: 2px solid #00d9c7;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.6);
+  transition: all 0.2s ease;
+}
+
+#octave-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(0, 217, 199, 0.8);
+}
+
+.octave-markers {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 5px;
+}
+
+.octave-markers span {
+  font-size: 0.85rem;
+  color: rgba(0, 217, 199, 0.7);
+  font-weight: 600;
+}
+
+/* ============================================
+   PROJECT MANAGER - Save/Load System
+   ============================================ */
+
+.project-manager {
+  width: 100%;
+  max-width: 1400px;
+  margin: 20px 0;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 217, 199, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.project-manager h2 {
+  color: #00d9c7;
+  font-size: 1rem;
+  margin: 0 0 12px 0;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.project-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.project-name-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+#project-name {
+  width: 200px;
+  padding: 8px 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 217, 199, 0.3);
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+#project-name:focus {
+  outline: none;
+  border-color: rgba(0, 217, 199, 0.8);
+  box-shadow: 0 0 10px rgba(0, 217, 199, 0.3);
+}
+
+#project-info {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  min-width: 70px;
+}
+
+#project-info.saved {
+  color: rgba(0, 255, 127, 1);
+  font-weight: 600;
+}
+
+.project-info {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+.project-info.saved {
+  color: rgba(0, 255, 127, 1);
+  font-weight: 600;
+}
+
+.project-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+.project-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #00b3a4, #00d9c7);
+  border: 1px solid #00d9c7;
+  color: #000;
+  text-shadow: none !important;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(0, 217, 199, 0.4);
+}
+
+.load-btn {
+  background: rgba(0, 217, 199, 0.1);
+  border: 1px solid rgba(0, 217, 199, 0.4);
+  color: #00d9c7;
+}
+
+.load-btn:hover {
+  background: rgba(0, 217, 199, 0.2);
+  border-color: #00d9c7;
+  transform: translateY(-2px);
+}
+
+.export-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.export-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.import-btn {
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #a855f7;
+}
+
+.import-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: #a855f7;
+  transform: translateY(-2px);
+}
+
+.new-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.new-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Saved Projects List */
+.saved-projects {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 217, 199, 0.2);
+}
+
+.saved-projects h3 {
+  color: #00d9c7;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.project-count {
+  font-size: 0.8rem;
+  color: rgba(0, 217, 199, 0.6);
+  font-weight: 400;
+}
+
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.no-projects {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  padding: 20px;
+  font-size: 0.85rem;
+}
+
+.project-card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 217, 199, 0.25);
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.project-card:hover {
+  border-color: rgba(0, 217, 199, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0, 217, 199, 0.2);
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.project-card-name {
+  font-size: 0.95rem;
+  margin: 0;
+  color: #00d9c7;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(0, 217, 199, 0.4);
+}
+
+.project-card-delete {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  background: rgba(255, 68, 68, 0.2);
+  border: 1px solid rgba(255, 68, 68, 0.4);
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+}
+
+.project-card-delete:hover {
+  background: rgba(255, 68, 68, 0.5);
+  border-color: rgba(255, 68, 68, 0.8);
+  transform: scale(1.05);
+}
+
+.project-card-info {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 4px 0;
+}
+
+.project-card-date {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  margin: 4px 0 0 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-buttons {
+    flex-direction: column;
+  }
+  
+  .project-btn {
+    width: 100%;
+  }
+  
+  .projects-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Test - Beatz by Elle</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      font-family: Arial, sans-serif;
+      color: white;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+      color: #00d9c7;
+      text-shadow: 0 0 20px rgba(0, 217, 199, 0.8);
+      margin-bottom: 30px;
+    }
+    .status {
+      padding: 20px;
+      background: rgba(0, 217, 199, 0.1);
+      border: 2px solid #00d9c7;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .button {
+      display: inline-block;
+      padding: 15px 40px;
+      margin: 10px;
+      background: linear-gradient(135deg, #00b3a4, #00d9c7);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(0, 217, 199, 0.5);
+    }
+    .info {
+      margin: 30px 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      text-align: left;
+    }
+    .code {
+      background: #000;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+      margin: 10px 0;
+      color: #00d9c7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 Beatz by Elle - Test Page</h1>
+    
+    <div class="status">
+      <h2>✅ If you can see this, your browser is working!</h2>
+      <p>The gray screen issue is likely a caching problem.</p>
+    </div>
+
+    <div class="info">
+      <h3>🔧 To fix the gray screen, try these in order:</h3>
+      <ol>
+        <li><strong>Clear Cache:</strong> Press <span class="code">Cmd + Shift + Delete</span> → Select "All time" → Check "Cached images and files" → Clear data</li>
+        <li><strong>Hard Refresh:</strong> Press <span class="code">Cmd + Shift + R</span></li>
+        <li><strong>Try Incognito:</strong> Press <span class="code">Cmd + Shift + N</span></li>
+      </ol>
+    </div>
+
+    <div class="info">
+      <h3>📂 How to open the main app:</h3>
+      <p><strong>Option 1: Find the file</strong></p>
+      <ol>
+        <li>Go to your Downloads folder</li>
+        <li>Open the <strong>DrumKitAppFinal</strong> folder</li>
+        <li>Double-click <strong>index.html</strong></li>
+        <li>If gray, press <span class="code">Cmd + Shift + R</span></li>
+      </ol>
+      
+      <p><strong>Option 2: Use Terminal</strong></p>
+      <div class="code">
+        cd /Users/ellec/Downloads/DrumKitAppFinal<br>
+        open index.html
+      </div>
+    </div>
+
+    <button class="button" onclick="window.location.href='index.html'">
+      🚀 Open Main App Now
+    </button>
+
+    <div class="info" style="margin-top: 40px; border: 2px solid #ff1493;">
+      <h3>💡 Pro Tip:</h3>
+      <p>If the main app still shows gray after hard refresh, open Chrome DevTools (<span class="code">Cmd + Option + I</span>) and click the "Console" tab to see any error messages. Take a screenshot and I can help debug!</p>
+    </div>
+  </div>
+</body>
+</html>
